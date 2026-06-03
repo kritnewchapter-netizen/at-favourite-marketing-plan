@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AT Favourite — แผนการตลาด 2569</title>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D98A;
+    --dark: #1A1A2E;
+    --dark2: #16213E;
+    --dark3: #0F3460;
+    --accent: #E94560;
+    --accent2: #7B2D8B;
+    --motta: #C9A84C;
+    --montipa: #7B2D8B;
+    --text: #E8E8F0;
+    --text-muted: #9A9AB0;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', 'Noto Sans Thai', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,26,46,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    height: 56px;
+    overflow-x: auto;
+  }
+  nav .logo { font-weight: 700; color: var(--gold); white-space: nowrap; font-size: 14px; margin-right: 1rem; }
+  nav a {
+    color: var(--text-muted); text-decoration: none; font-size: 12px;
+    white-space: nowrap; padding: 4px 10px; border-radius: 20px;
+    transition: all .2s;
+  }
+  nav a:hover { color: var(--gold); background: rgba(201,168,76,0.1); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 4rem;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                radial-gradient(circle at 70% 50%, rgba(123,45,139,0.08) 0%, transparent 60%);
+  }
+  .hero-badge {
+    display: inline-block; padding: 6px 18px; border: 1px solid var(--gold);
+    border-radius: 30px; color: var(--gold); font-size: 12px; font-weight: 600;
+    letter-spacing: 2px; margin-bottom: 1.5rem; position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800;
+    line-height: 1.2; margin-bottom: 1rem; position: relative;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin-bottom: 3rem; position: relative; }
+  .brand-pills { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+  .brand-pill {
+    padding: 10px 24px; border-radius: 30px; font-weight: 700; font-size: 14px;
+  }
+  .pill-motta { background: rgba(201,168,76,0.15); border: 1px solid var(--gold); color: var(--gold); }
+  .pill-montipa { background: rgba(123,45,139,0.15); border: 1px solid var(--accent2); color: #C084D4; }
+
+  /* STATS */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; padding: 3rem 2rem; max-width: 1100px; margin: 0 auto;
+  }
+  .stat-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem; text-align: center;
+    transition: transform .2s;
+  }
+  .stat-card:hover { transform: translateY(-4px); }
+  .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--gold); }
+  .stat-label { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+
+  /* SECTION */
+  .section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(201,168,76,0.15); border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: var(--gold); font-size: 14px;
+    flex-shrink: 0;
+  }
+  .section h2 { font-size: 1.6rem; font-weight: 700; }
+  .section h3 { font-size: 1.1rem; font-weight: 700; color: var(--gold); margin: 1.5rem 0 0.8rem; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 2rem; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+  }
+  .card.motta-card { border-color: rgba(201,168,76,0.3); }
+  .card.montipa-card { border-color: rgba(123,45,139,0.3); }
+  .card-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem; }
+  .card-title.gold { color: var(--gold); }
+  .card-title.purple { color: #C084D4; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th {
+    background: rgba(201,168,76,0.1); color: var(--gold);
+    padding: 10px 14px; text-align: left; font-weight: 600;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  td {
+    padding: 10px 14px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* SWOT */
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .swot-cell { padding: 1.5rem; }
+  .swot-cell:nth-child(1) { background: rgba(76,201,130,0.05); }
+  .swot-cell:nth-child(2) { background: rgba(233,69,96,0.05); border-left: 1px solid var(--border); }
+  .swot-cell:nth-child(3) { background: rgba(201,168,76,0.05); border-top: 1px solid var(--border); }
+  .swot-cell:nth-child(4) { background: rgba(233,69,96,0.07); border-left: 1px solid var(--border); border-top: 1px solid var(--border); }
+  .swot-label { font-weight: 800; font-size: 11px; letter-spacing: 2px; margin-bottom: 0.8rem; }
+  .swot-label.s { color: #4CC982; }
+  .swot-label.w { color: #E94560; }
+  .swot-label.o { color: var(--gold); }
+  .swot-label.t { color: #F87171; }
+  .swot-cell ul { list-style: none; padding: 0; }
+  .swot-cell li { font-size: 13px; padding: 3px 0; color: var(--text-muted); }
+  .swot-cell li::before { content: '→ '; color: inherit; opacity: 0.5; }
+
+  /* FUNNEL */
+  .funnel { display: flex; flex-direction: column; gap: 0; }
+  .funnel-step {
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    margin: 0;
+    position: relative;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .funnel-step:first-child { border-radius: 12px 12px 0 0; }
+  .funnel-step:last-child { border-radius: 0 0 12px 12px; }
+  .fs-1 { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.2); }
+  .fs-2 { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.15); border-top: none; }
+  .fs-3 { background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.1); border-top: none; }
+  .fs-4 { background: rgba(123,45,139,0.1); border: 1px solid rgba(123,45,139,0.2); border-top: none; }
+  .funnel-label { font-weight: 700; font-size: 13px; min-width: 140px; color: var(--gold); }
+  .funnel-items { color: var(--text-muted); font-size: 13px; }
+
+  /* BUDGET */
+  .budget-bars { display: flex; flex-direction: column; gap: 10px; margin: 1rem 0; }
+  .budget-row { display: flex; align-items: center; gap: 12px; }
+  .budget-name { min-width: 180px; font-size: 13px; color: var(--text-muted); }
+  .budget-bar-wrap { flex: 1; background: rgba(255,255,255,0.06); border-radius: 6px; height: 28px; overflow: hidden; }
+  .budget-bar {
+    height: 100%; border-radius: 6px;
+    display: flex; align-items: center; padding: 0 10px;
+    font-size: 12px; font-weight: 700; color: var(--dark); white-space: nowrap;
+    transition: width 1s ease;
+  }
+  .budget-pct { min-width: 40px; text-align: right; font-size: 13px; font-weight: 700; color: var(--gold); }
+
+  /* PERSONA */
+  .persona-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .persona {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem; position: relative; overflow: hidden;
+  }
+  .persona::before {
+    content: attr(data-emoji);
+    position: absolute; right: -10px; top: -10px;
+    font-size: 5rem; opacity: 0.08; line-height: 1;
+  }
+  .persona-name { font-weight: 800; font-size: 1.1rem; color: var(--gold); margin-bottom: 4px; }
+  .persona-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 1rem; }
+  .persona li { font-size: 13px; color: var(--text-muted); padding: 2px 0; list-style: none; }
+  .persona li::before { content: '• '; color: var(--gold); }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .kpi-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.2rem;
+  }
+  .kpi-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .kpi-value { font-size: 1.5rem; font-weight: 800; color: var(--gold); }
+  .kpi-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* CALENDAR */
+  .cal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; }
+  .cal-item {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem;
+  }
+  .cal-month { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 1px; margin-bottom: 6px; }
+  .cal-event { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .cal-brand { font-size: 11px; color: var(--text-muted); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .tag-motta { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .tag-montipa { background: rgba(123,45,139,0.15); color: #C084D4; }
+  .tag-both { background: rgba(233,69,96,0.15); color: #F87171; }
+
+  /* TEAM */
+  .team-chart { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+  .team-root { text-align: center; margin-bottom: 1.5rem; }
+  .team-box {
+    display: inline-block; padding: 10px 20px;
+    background: rgba(201,168,76,0.15); border: 1px solid var(--gold);
+    border-radius: 10px; font-weight: 700; font-size: 13px; color: var(--gold);
+  }
+  .team-children { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .team-node {
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem; min-width: 160px; text-align: center;
+  }
+  .team-role { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .team-count { font-size: 11px; color: var(--text-muted); }
+
+  /* PLATFORM */
+  .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .platform-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.2rem; text-align: center;
+  }
+  .platform-icon { font-size: 2rem; margin-bottom: 8px; }
+  .platform-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .platform-desc { font-size: 12px; color: var(--text-muted); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 3rem 2rem;
+    color: var(--text-muted); font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+  footer strong { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .swot-grid { grid-template-columns: 1fr; }
+    .swot-cell:nth-child(2) { border-left: none; border-top: 1px solid var(--border); }
+    .swot-cell:nth-child(4) { border-left: none; }
+    nav { gap: 0.5rem; padding: 0 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">AT FAVOURITE</span>
+  <a href="#overview">ภาพรวม</a>
+  <a href="#strategy">กลยุทธ์</a>
+  <a href="#online">Online</a>
+  <a href="#offline">Offline</a>
+  <a href="#ads">โฆษณา</a>
+  <a href="#team">ทีม</a>
+  <a href="#calendar">ปฏิทิน</a>
+  <a href="#kpi">KPI</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">MARKETING PLAN 2569</div>
+  <h1>แผนการตลาดฉบับสมบูรณ์<br><span>AT Favourite Co., Ltd.</span></h1>
+  <p>วางแผนโดย Marketing Manager · ครอบคลุม Motta & Montipa · Online & Offline</p>
+  <div class="brand-pills">
+    <span class="brand-pill pill-motta">💍 Motta — เครื่องประดับ Silver 925</span>
+    <span class="brand-pill pill-montipa">👗 Montipa — กางเกงทำงานไม่ต้องรีด</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-num">70+</div><div class="stat-label">สาขาทั่วประเทศ</div></div>
+  <div class="stat-card"><div class="stat-num">16+</div><div class="stat-label">ปีที่ดำเนินกิจการ</div></div>
+  <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">แบรนด์หลัก</div></div>
+  <div class="stat-card"><div class="stat-num">+30%</div><div class="stat-label">เป้าหมาย Online Revenue</div></div>
+  <div class="stat-card"><div class="stat-num">3.0x</div><div class="stat-label">Target ROAS รวม</div></div>
+  <div class="stat-card"><div class="stat-num">20K</div><div class="stat-label">Line OA Database ตั้งเป้า</div></div>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 1: OVERVIEW -->
+<section class="section" id="overview">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>สถานการณ์และวิเคราะห์ธุรกิจ</h2>
+  </div>
+
+  <h3>Product Portfolio</h3>
+  <div class="card-grid">
+    <div class="card motta-card">
+      <div class="card-title gold">💍 Motta</div>
+      <div class="table-wrap">
+        <table>
+          <tr><td style="color:var(--text-muted);width:110px">Category</td><td>เครื่องประดับ Silver 925, Nickel-free</td></tr>
+          <tr><td style="color:var(--text-muted)">Price Range</td><td>220–690 บาท</td></tr>
+          <tr><td style="color:var(--text-muted)">USP</td><td>ไม่แพ้ ไม่คัน + บริการเจาะหู</td></tr>
+          <tr><td style="color:var(--text-muted)">Target</td><td>หญิง 18–35 ปี ผิวแพ้ง่าย</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card montipa-card">
+      <div class="card-title purple">👗 Montipa</div>
+      <div class="table-wrap">
+        <table>
+          <tr><td style="color:var(--text-muted);width:110px">Category</td><td>กางเกงแฟชั่นทำงาน</td></tr>
+          <tr><td style="color:var(--text-muted)">Price Range</td><td>199–890 บาท</td></tr>
+          <tr><td style="color:var(--text-muted)">USP</td><td>"ใส่สวย ไม่ต้องรีด"</td></tr>
+          <tr><td style="color:var(--text-muted)">Target</td><td>หญิงทำงาน 22–40 ปี</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3>SWOT Analysis</h3>
+  <div class="swot-grid">
+    <div class="swot-cell">
+      <div class="swot-label s">STRENGTHS จุดแข็ง</div>
+      <ul>
+        <li>USP ชัดเจนทั้ง 2 แบรนด์</li>
+        <li>ราคาเข้าถึงง่าย (Mass market)</li>
+        <li>สาขากว้างขวาง 70+ สาขา</li>
+        <li>Cross-sell ระหว่าง 2 แบรนด์</li>
+      </ul>
+    </div>
+    <div class="swot-cell">
+      <div class="swot-label w">WEAKNESSES จุดอ่อน</div>
+      <ul>
+        <li>Brand awareness ต่ำระดับประเทศ</li>
+        <li>งบประมาณยังจำกัด</li>
+        <li>เว็บไซต์เป็น template platform</li>
+        <li>ไม่มี Loyalty program ชัดเจน</li>
+      </ul>
+    </div>
+    <div class="swot-cell">
+      <div class="swot-label o">OPPORTUNITIES โอกาส</div>
+      <ul>
+        <li>กลุ่มผู้แพ้นิกเกิลเติบโต</li>
+        <li>TikTok Shop / Social Commerce</li>
+        <li>Micro-influencer ROI สูง</li>
+        <li>กลุ่ม Working women ขยายตัว</li>
+      </ul>
+    </div>
+    <div class="swot-cell">
+      <div class="swot-label t">THREATS ภัยคุกคาม</div>
+      <ul>
+        <li>คู่แข่ง Pandora ในตลาดบน</li>
+        <li>Shopee Generic ราคาถูก</li>
+        <li>Fast fashion กดราคาตลาด</li>
+        <li>ต้นทุนค่าเช่าพื้นที่ห้างสูง</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Customer Personas</h3>
+  <div class="persona-cards">
+    <div class="persona" data-emoji="💍">
+      <div class="persona-name">พลอย — Motta Core</div>
+      <div class="persona-sub">อายุ 22–30 ปี · นักศึกษา/เพิ่งทำงาน</div>
+      <ul>
+        <li>มีปัญหาผิวแพ้ต่างหูราคาถูก</li>
+        <li>ช้อปผ่าน TikTok, Shopee, Instagram</li>
+        <li>งบ: 200–500 บาท/ครั้ง</li>
+        <li>ตัดสินใจจาก Review และ Unboxing</li>
+      </ul>
+    </div>
+    <div class="persona" data-emoji="🎁">
+      <div class="persona-name">แนน — Motta Gifter</div>
+      <div class="persona-sub">อายุ 25–38 ปี · มีรายได้ระดับกลาง</div>
+      <ul>
+        <li>ซื้อของขวัญวันเกิด / วาเลนไทน์</li>
+        <li>ตัดสินใจจาก Packaging และรีวิว</li>
+        <li>งบ: 400–1,500 บาท</li>
+        <li>ค้นหาผ่าน Google + Facebook</li>
+      </ul>
+    </div>
+    <div class="persona" data-emoji="👗">
+      <div class="persona-name">มิ้ว — Montipa Working Woman</div>
+      <div class="persona-sub">อายุ 25–40 ปี · ทำงานออฟฟิศ</div>
+      <ul>
+        <li>ต้องการเสื้อผ้าทำงานที่ดูดี ไม่ต้องรีด</li>
+        <li>ซื้อหลายชิ้นเมื่อพึงพอใจ</li>
+        <li>ช้อปผ่าน Facebook, Line, หน้าร้าน</li>
+        <li>Community: "Montipa Sisters"</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 2: STRATEGY -->
+<section class="section" id="strategy">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>กลยุทธ์การตลาดหลัก</h2>
+  </div>
+
+  <h3>Brand Positioning</h3>
+  <div class="card-grid">
+    <div class="card motta-card" style="padding:1.5rem">
+      <div style="font-size:11px;color:var(--gold);letter-spacing:2px;font-weight:700;margin-bottom:8px">MOTTA POSITIONING</div>
+      <div style="font-size:1.05rem;font-weight:600;line-height:1.5">"เครื่องประดับที่ใครก็ใส่ได้<br>สวยทุกวัน ไม่ต้องกลัวแพ้"</div>
+    </div>
+    <div class="card montipa-card" style="padding:1.5rem">
+      <div style="font-size:11px;color:#C084D4;letter-spacing:2px;font-weight:700;margin-bottom:8px">MONTIPA POSITIONING</div>
+      <div style="font-size:1.05rem;font-weight:600;line-height:1.5">"กางเกงทำงานของผู้หญิงยุคใหม่<br>ดูดี สะดวก ไม่ต้องรีด"</div>
+    </div>
+  </div>
+
+  <h3>Marketing Funnel Strategy</h3>
+  <div class="funnel">
+    <div class="funnel-step fs-1">
+      <span class="funnel-label">🔭 AWARENESS</span>
+      <span class="funnel-items">TikTok Organic · Influencer seeding · Facebook Reach · Google Display</span>
+    </div>
+    <div class="funnel-step fs-2">
+      <span class="funnel-label">🤔 CONSIDERATION</span>
+      <span class="funnel-items">Retargeting Ads · Shopee Product Pages · UGC Reviews · Testimonials</span>
+    </div>
+    <div class="funnel-step fs-3">
+      <span class="funnel-label">💳 CONVERSION</span>
+      <span class="funnel-items">Flash Sales · Promo Codes · Line OA Push · Shopee Flash Deals</span>
+    </div>
+    <div class="funnel-step fs-4">
+      <span class="funnel-label">💜 LOYALTY</span>
+      <span class="funnel-items">Post-purchase Line OA · Loyalty Points · Referral · Community</span>
+    </div>
+  </div>
+
+  <h3>Hero-Hub-Help Content Framework</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Layer</th><th>คำอธิบาย</th><th>ตัวอย่าง (Motta)</th><th>ความถี่</th></tr>
+      <tr><td><strong style="color:var(--gold)">Hero</strong></td><td>Content ใหญ่สร้าง Awareness</td><td>"เปิดตัว Collection กับ Presenter"</td><td>1–2 ครั้ง/ปี</td></tr>
+      <tr><td><strong style="color:#60A5FA">Hub</strong></td><td>Series ประจำสร้าง Community</td><td>"Motta Monday: Styling tip"</td><td>ทุกสัปดาห์</td></tr>
+      <tr><td><strong style="color:#4CC982">Help</strong></td><td>ตอบคำถาม ดัก SEO</td><td>"ต่างหูผิวแพ้ง่าย เลือกอย่างไร?"</td><td>ตลอดเวลา</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 3: ONLINE -->
+<section class="section" id="online">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>แผนช่องทางออนไลน์</h2>
+  </div>
+
+  <h3>Platform Strategy</h3>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-icon">🎵</div>
+      <div class="platform-name" style="color:var(--gold)">TikTok</div>
+      <div class="platform-desc">Priority #1 สำหรับ Motta<br>Awareness + TikTok Shop<br>5–7 posts/สัปดาห์</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">📘</div>
+      <div class="platform-name" style="color:#60A5FA">Facebook/IG</div>
+      <div class="platform-desc">Priority #1 สำหรับ Montipa<br>Community + Retargeting<br>4–5 posts/สัปดาห์</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">💬</div>
+      <div class="platform-name" style="color:#4CC982">Line OA</div>
+      <div class="platform-desc">Direct conversion + Retention<br>Promo 2x/สัปดาห์<br>Auto welcome sequence</div>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🛒</div>
+      <div class="platform-name" style="color:#F87171">Shopee</div>
+      <div class="platform-desc">Search Ads + Flash Sale<br>2 Flash Sales/เดือน<br>Bundle cross-brand deals</div>
+    </div>
+  </div>
+
+  <h3>TikTok Content Pillars (Motta)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Pillar</th><th>สัดส่วน</th><th>ตัวอย่าง</th></tr>
+      <tr><td>Educational</td><td>30%</td><td>"ทำไมต้องเลือกก้านเงิน 925? อธิบายใน 60 วินาที"</td></tr>
+      <tr><td>Entertainment/Trend</td><td>30%</td><td>Outfit + เครื่องประดับ Motta ตาม trend</td></tr>
+      <tr><td>Product Showcase</td><td>25%</td><td>Unboxing, Try-on, Close-up detail</td></tr>
+      <tr><td>Social Proof</td><td>15%</td><td>Duet review, Reply to comment</td></tr>
+    </table>
+  </div>
+
+  <h3>Influencer Tier Strategy</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Tier</th><th>Followers</th><th>จำนวน/เดือน</th><th>งบ/คน</th><th>โฟกัส</th></tr>
+      <tr><td><span class="tag tag-both">Nano</span></td><td>1K–10K</td><td>20 คน</td><td>500–1,500 ฿</td><td>Authentic review, UGC</td></tr>
+      <tr><td><span class="tag tag-motta">Micro</span></td><td>10K–100K</td><td>5 คน</td><td>3,000–10,000 ฿</td><td>Styling content</td></tr>
+      <tr><td><span class="tag tag-montipa">Mid</span></td><td>100K–500K</td><td>1–2 คน</td><td>15,000–40,000 ฿</td><td>Campaign videos</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 4: ADS -->
+<section class="section" id="ads">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>แผนโฆษณาและการวิเคราะห์ผล</h2>
+  </div>
+
+  <h3>งบโฆษณารายเดือน (ตัวอย่าง 120,000 บาท)</h3>
+  <div class="budget-bars">
+    <div class="budget-row">
+      <span class="budget-name">Meta Ads (FB/IG)</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:29%;background:var(--gold)">35,000 ฿</div></div>
+      <span class="budget-pct">29%</span>
+    </div>
+    <div class="budget-row">
+      <span class="budget-name">Influencer Marketing</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:21%;background:#C084D4">25,000 ฿</div></div>
+      <span class="budget-pct">21%</span>
+    </div>
+    <div class="budget-row">
+      <span class="budget-name">Content Production</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:13%;background:#60A5FA">15,000 ฿</div></div>
+      <span class="budget-pct">13%</span>
+    </div>
+    <div class="budget-row">
+      <span class="budget-name">TikTok Ads + Spark</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:13%;background:#F87171">15,000 ฿</div></div>
+      <span class="budget-pct">13%</span>
+    </div>
+    <div class="budget-row">
+      <span class="budget-name">Shopee Ads</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:8%;background:#4CC982">10,000 ฿</div></div>
+      <span class="budget-pct">8%</span>
+    </div>
+    <div class="budget-row">
+      <span class="budget-name">Google Ads</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:8%;background:#FCD34D">10,000 ฿</div></div>
+      <span class="budget-pct">8%</span>
+    </div>
+    <div class="budget-row">
+      <span class="budget-name">Event / Offline</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:4%;background:#94A3B8">5,000 ฿</div></div>
+      <span class="budget-pct">4%</span>
+    </div>
+    <div class="budget-row">
+      <span class="budget-name">Tools & Software</span>
+      <div class="budget-bar-wrap"><div class="budget-bar" style="width:4%;background:#64748B">5,000 ฿</div></div>
+      <span class="budget-pct">4%</span>
+    </div>
+  </div>
+
+  <h3>Optimization Decision Tree</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title" style="color:#F87171">🔴 CPA สูงกว่า Target</div>
+      <ol style="padding-left:1.2rem;font-size:13px;color:var(--text-muted);line-height:2">
+        <li>ตรวจ Landing Page — Bounce rate สูงหรือไม่?</li>
+        <li>ตรวจ Audience Relevance Score</li>
+        <li>ทดสอบ Creative ใหม่ (เปลี่ยน Hook 3 วิแรก)</li>
+        <li>ปรับ Audience ให้แคบ/กว้างขึ้น</li>
+        <li>ปรับ Bid Strategy</li>
+      </ol>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#FCD34D">🟡 CTR ต่ำกว่า 1%</div>
+      <ol style="padding-left:1.2rem;font-size:13px;color:var(--text-muted);line-height:2">
+        <li>เปลี่ยน Creative format (Video→Image)</li>
+        <li>ทดสอบ Headline ใหม่</li>
+        <li>ตรวจ Ad Fatigue (Frequency &gt; 3?)</li>
+        <li>เปลี่ยน Placement</li>
+      </ol>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#4CC982">🟢 ROAS ดีกว่า Target</div>
+      <ol style="padding-left:1.2rem;font-size:13px;color:var(--text-muted);line-height:2">
+        <li>Scale Budget +20–30%</li>
+        <li>สร้าง Lookalike จาก converters ใหม่</li>
+        <li>ขยาย Audience ค่อยๆ (1%→2%→3%)</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>Weekly Reporting KPIs</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Metric</th><th>Motta Target</th><th>Montipa Target</th></tr>
+      <tr><td>ROAS (Meta)</td><td>≥ 3.5x</td><td>≥ 3.0x</td></tr>
+      <tr><td>CPA (Meta)</td><td>≤ 150 บาท</td><td>≤ 200 บาท</td></tr>
+      <tr><td>CTR</td><td>≥ 1.5%</td><td>≥ 1.2%</td></tr>
+      <tr><td>Shopee Conversion</td><td>≥ 3%</td><td>≥ 3%</td></tr>
+      <tr><td>New Line Followers/สัปดาห์</td><td>+500</td><td>+300</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 5: OFFLINE -->
+<section class="section" id="offline">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2>แผนช่องทางออฟไลน์</h2>
+  </div>
+
+  <h3>Quarterly Campaign Events</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>ไตรมาส</th><th>Theme</th><th>กิจกรรม</th></tr>
+      <tr><td><span class="tag tag-motta">Q1</span> ม.ค.–มี.ค.</td><td>Valentine Collection</td><td>Pop-up "ของขวัญ" + Photo booth + Social media contest</td></tr>
+      <tr><td><span class="tag tag-both">Q2</span> เม.ย.–มิ.ย.</td><td>Summer Refresh</td><td>New collection launch + Live performance area</td></tr>
+      <tr><td><span class="tag tag-both">Q3</span> ก.ค.–ก.ย.</td><td>Mid-Year Sale</td><td>Mega sale event + Lucky draw</td></tr>
+      <tr><td><span class="tag tag-motta">Q4</span> ต.ค.–ธ.ค.</td><td>Year-End Gifting</td><td>Gift wrapping station + Influencer visit</td></tr>
+    </table>
+  </div>
+
+  <h3>Partnership Strategy</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Partner Type</th><th>ตัวอย่าง</th><th>รูปแบบ</th></tr>
+      <tr><td>Nail Salons / Beauty</td><td>ร้านทำเล็บในห้างเดียวกัน</td><td>แจก Coupon cross ให้ลูกค้า</td></tr>
+      <tr><td>Women's Clothing</td><td>แบรนด์เสื้อผ้า Non-competing</td><td>Bundle promotion, Co-content</td></tr>
+      <tr><td>Office Buildings</td><td>อาคารสำนักงานปากเกร็ด</td><td>Pop-up หน้าออฟฟิศ</td></tr>
+      <tr><td>Wedding Planners</td><td>ของขวัญงานแต่ง (Motta)</td><td>Feature ใน Wedding package</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 6: TEAM -->
+<section class="section" id="team">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2>โครงสร้างทีมการตลาด</h2>
+  </div>
+
+  <div class="team-chart">
+    <div class="team-root">
+      <div class="team-box">Marketing Manager (1)</div>
+    </div>
+    <div class="team-children">
+      <div class="team-node">
+        <div class="team-role" style="color:var(--gold)">Digital Marketing Lead</div>
+        <div class="team-count">1 คน</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:6px">Social Specialist Motta · Montipa<br>Paid Ads · E-commerce</div>
+      </div>
+      <div class="team-node">
+        <div class="team-role" style="color:#C084D4">Creative Lead</div>
+        <div class="team-count">1 คน</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:6px">Graphic Designer (1–2)<br>Video Editor / Creator (1)</div>
+      </div>
+      <div class="team-node">
+        <div class="team-role" style="color:#60A5FA">Influencer & PR</div>
+        <div class="team-count">1 คน</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:6px">Influencer outreach<br>Event coordination</div>
+      </div>
+      <div class="team-node">
+        <div class="team-role" style="color:#4CC982">Marketing Admin / Data</div>
+        <div class="team-count">1 คน</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:6px">Analytics · Reports<br>Admin support</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Team Meeting Rituals</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Meeting</th><th>ความถี่</th><th>ผู้เข้าร่วม</th><th>วัตถุประสงค์</th></tr>
+      <tr><td>Daily Stand-up</td><td>ทุกวัน 09:00 (15 นาที)</td><td>ทีม Digital</td><td>Progress + blockers</td></tr>
+      <tr><td>Content Planning</td><td>ทุกวันศุกร์ (45 นาที)</td><td>Digital + Creative</td><td>Plan สัปดาห์หน้า</td></tr>
+      <tr><td>Weekly Review</td><td>ทุกวันจันทร์ (1 ชั่วโมง)</td><td>ทีมทั้งหมด</td><td>Review KPIs, adjustments</td></tr>
+      <tr><td>Monthly Strategy</td><td>ต้นเดือน (2 ชั่วโมง)</td><td>Manager + Leads</td><td>Review + Plan เดือนหน้า</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 7: CALENDAR -->
+<section class="section" id="calendar">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2>ปฏิทินการตลาดทั้งปี</h2>
+  </div>
+
+  <div class="cal-grid">
+    <div class="cal-item">
+      <div class="cal-month">JAN · ม.ค.</div>
+      <div class="cal-event">New Year New Look</div>
+      <div class="cal-brand"><span class="tag tag-both">ทั้งคู่</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">FEB · ก.พ.</div>
+      <div class="cal-event">Valentine Love Collection</div>
+      <div class="cal-brand"><span class="tag tag-motta">Motta</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">APR · เม.ย.</div>
+      <div class="cal-event">Summer Refresh</div>
+      <div class="cal-brand"><span class="tag tag-both">ทั้งคู่</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">MAY · พ.ค.</div>
+      <div class="cal-event">Gift for Mom (วันแม่)</div>
+      <div class="cal-brand"><span class="tag tag-motta">Motta</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">JUL · ก.ค.</div>
+      <div class="cal-event">Mid-Year Sale 50%</div>
+      <div class="cal-brand"><span class="tag tag-both">ทั้งคู่</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">SEP · ก.ย.</div>
+      <div class="cal-event">Back to Work Chic</div>
+      <div class="cal-brand"><span class="tag tag-montipa">Montipa</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">OCT · ต.ค.</div>
+      <div class="cal-event">Dark Romance Collection</div>
+      <div class="cal-brand"><span class="tag tag-motta">Motta</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">NOV · พ.ย.</div>
+      <div class="cal-event">11.11 Mega Sale</div>
+      <div class="cal-brand"><span class="tag tag-both">ทั้งคู่</span></div>
+    </div>
+    <div class="cal-item">
+      <div class="cal-month">DEC · ธ.ค.</div>
+      <div class="cal-event">Holiday Gift Collection</div>
+      <div class="cal-brand"><span class="tag tag-both">ทั้งคู่</span></div>
+    </div>
+  </div>
+
+  <h3>Campaign Lead Time (8 สัปดาห์)</h3>
+  <div class="card" style="font-family:monospace;font-size:13px;color:var(--text-muted);line-height:2">
+    <div><span style="color:var(--gold)">สัปดาห์ -8:</span> กำหนด Campaign brief + ประสาน Product team</div>
+    <div><span style="color:var(--gold)">สัปดาห์ -6:</span> Creative brief → Creative team</div>
+    <div><span style="color:var(--gold)">สัปดาห์ -4:</span> Draft creative review</div>
+    <div><span style="color:var(--gold)">สัปดาห์ -3:</span> Final creative approve</div>
+    <div><span style="color:var(--gold)">สัปดาห์ -2:</span> Setup Ads, Influencer brief</div>
+    <div><span style="color:var(--gold)">สัปดาห์ -1:</span> Pre-campaign Teaser content</div>
+    <div><span style="color:#4CC982">สัปดาห์ 0:</span> 🚀 Campaign Launch</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECTION 8: KPI -->
+<section class="section" id="kpi">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <h2>KPI Targets (รายปี)</h2>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Online Revenue Growth</div>
+      <div class="kpi-value">+30%</div>
+      <div class="kpi-desc">Year-over-Year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ROAS รวมทุกช่องทาง</div>
+      <div class="kpi-value">≥ 3.0x</div>
+      <div class="kpi-desc">Blended across all paid</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CPA — Motta</div>
+      <div class="kpi-value">≤ 150 ฿</div>
+      <div class="kpi-desc">Meta Ads</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">CPA — Montipa</div>
+      <div class="kpi-value">≤ 200 ฿</div>
+      <div class="kpi-desc">Meta Ads</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Social Followers รวม</div>
+      <div class="kpi-value">70K+</div>
+      <div class="kpi-desc">ทั้ง 2 แบรนด์รวม</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Line OA Database</div>
+      <div class="kpi-value">20,000</div>
+      <div class="kpi-desc">Contacts ภายใน 12 เดือน</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Shopee Rating</div>
+      <div class="kpi-value">≥ 4.8 ★</div>
+      <div class="kpi-desc">รักษาไว้ตลอดปี</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Repeat Purchase Rate</div>
+      <div class="kpi-value">≥ 25%</div>
+      <div class="kpi-desc">Loyalty indicator</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Engagement Rate IG/FB</div>
+      <div class="kpi-value">≥ 3%</div>
+      <div class="kpi-desc">TikTok ≥ 5%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Line OA Open Rate</div>
+      <div class="kpi-value">≥ 30%</div>
+      <div class="kpi-desc">Broadcast messages</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">New Customers/Month</div>
+      <div class="kpi-value">+500</div>
+      <div class="kpi-desc">Online channels</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Cross-brand Revenue</div>
+      <div class="kpi-value">15%</div>
+      <div class="kpi-desc">Motta↔Montipa cross-sell</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>จัดทำโดย <strong>Marketing Manager</strong> · บริษัท แอ็ท เฟเวอริท จำกัด</p>
+  <p style="margin-top:6px">มิถุนายน 2569 · ควรทบทวนและปรับปรุงทุกไตรมาส</p>
+</footer>
+
+</body>
+</html>
